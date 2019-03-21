@@ -165,7 +165,11 @@ public class Employe {
      * @param dateEmbauche the dateEmbauche to set
      */
     public void setDateEmbauche(LocalDate dateEmbauche) {
-        this.dateEmbauche = dateEmbauche;
+        if (dateEmbauche == null) {
+            this.dateEmbauche = LocalDate.now();
+        } else {
+            this.dateEmbauche = dateEmbauche;
+        }
     }
 
     /**
