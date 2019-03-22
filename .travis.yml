@@ -1,1 +1,9 @@
 language: java
+
+addons:
+  sonarcloud:
+    organization: "amachuron-github"
+
+script :
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent package
+  sonar:sonar - Dsonar.projectKey=amachuron_ipi-java-350-delivery-ex
