@@ -1,6 +1,7 @@
 package com.ipiecoles.java.java350.service;
 
 import com.ipiecoles.java.java350.model.Employe;
+import com.ipiecoles.java.java350.model.Entreprise;
 import com.ipiecoles.java.java350.model.NiveauEtude;
 import com.ipiecoles.java.java350.model.Poste;
 import com.ipiecoles.java.java350.repository.EmployeRepository;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +29,8 @@ public class EmployeServiceIntegrationTest {
     @Test
     public void testIntegrationEmbaucheEmploye() throws Exception{
 
+        employeRepository.save(new Employe("Doe", "John", "T12345", LocalDate.now(), Entreprise.SALAIRE_BASE, 1, 1.0));
+
         //Given avec de vraies données d'entrées
         String nom = "Doe";
         String prenom = "John";
@@ -40,13 +45,11 @@ public class EmployeServiceIntegrationTest {
         //Then avec de vraies vérifications...
         Assertions.assertNotNull(e);
         Assertions.assertEquals(nom, e.getNom());
-        Assertions.assertEquals(nom, e.getPrenom());
-        Assertions.assertEquals(nom, e.getDateEmbauche());
-        Assertions.assertEquals(nom, e.getMatricule());
-        Assertions.assertEquals(nom, e.getTempsPartiel());
-        //1521.22 * 1.2 * 1.0
-        Assertions.assertEquals(nom, e.getTempsPartiel());
-        Assertions.assertEquals(1825.46, (double) e.getSalaire());
+        Assertions.assertEquals(prenom, e.getPrenom());
+        Assertions.assertEquals(LocalDate.now(), e.getDateEmbauche());
+        Assertions.assertEquals("T12346", e.getMatricule());
         Assertions.assertEquals(tempsPartiel, e.getTempsPartiel());
+        //1521.22 * 1.2 * 1.0
+        Assertions.assertEquals(1825.46, (double) e.getSalaire());
     }
 }
